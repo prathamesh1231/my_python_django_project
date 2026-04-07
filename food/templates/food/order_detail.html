@@ -1,0 +1,70 @@
+{% extends 'food/base.html' %}
+{% block title %}Order #{{ order.id }} | Prathamesh Food-court{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+
+      <!-- Success Banner -->
+      <div class="text-center mb-4">
+        <div style="font-size:4rem;">🎉</div>
+        <h2 class="fw-bold">Order Placed!</h2>
+        <p class="text-muted">Your order <strong>#{{ order.id }}</strong> has been received.</p>
+      </div>
+
+      <!-- Order Card -->
+      <div class="card shadow border-0">
+        <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+          <span class="fw-bold">Order #{{ order.id }}</span>
+          <span>{{ order.created_at|date:"d M Y, h:i A" }}</span>
+        </div>
+        <div class="card-body p-4">
+
+          <!-- Status -->
+          <div class="mb-4 text-center">
+            {% if order.status == 'pending' %}
+              <span class="badge bg-warning text-dark fs-5 px-4 py-2">⏳ Pending</span>
+            {% elif order.status == 'confirmed' %}
+              <span class="badge bg-info fs-5 px-4 py-2">✅ Confirmed</span>
+            {% elif order.status == 'preparing' %}
+              <span class="badge bg-primary fs-5 px-4 py-2">👨‍🍳 Preparing</span>
+            {% elif order.status == 'delivered' %}
+              <span class="badge bg-success fs-5 px-4 py-2">🎉 Delivered</span>
+            {% elif order.status == 'cancelled' %}
+              <span class="badge bg-danger fs-5 px-4 py-2">❌ Cancelled</span>
+            {% endif %}
+          </div>
+
+          <!-- Items -->
+          <h6 class="fw-bold text-muted mb-3">ITEMS ORDERED</h6>
+          {% for item in order.items.all %}
+          <div class="d-flex justify-content-between mb-2">
+            <span>{{ item.menu_item.emoji }} {{ item.menu_item.name }}
+              <span class="badge bg-light text-dark ms-1">× {{ item.quantity }}</span>
+            </span>
+            <span class="fw-bold">₹{{ item.subtotal }}</span>
+          </div>
+          {% endfor %}
+          <hr>
+          <div class="d-flex justify-content-between fw-bold fs-5">
+            <span>Total</span>
+            <span class="text-danger">₹{{ order.total }}</span>
+          </div>
+
+          <!-- Delivery Info -->
+          <hr>
+          <h6 class="fw-bold text-muted mb-2">DELIVERY DETAILS</h6>
+          <p class="mb-1"><strong>📍 Address:</strong> {{ order.address }}</p>
+          <p class="mb-0"><strong>📞 Phone:</strong> {{ order.phone }}</p>
+        </div>
+        <div class="card-footer text-center py-3">
+          <a href="{% url 'my_orders' %}" class="btn btn-outline-danger me-2">← All Orders</a>
+          <a href="{% url 'menu' %}" class="btn btn-danger">Order Again 🍕</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

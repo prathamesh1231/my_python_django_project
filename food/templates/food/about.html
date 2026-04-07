@@ -1,0 +1,147 @@
+{% extends 'food/base.html' %}
+{% load static %}
+{% block title %}Prathamesh Food-court | About Us{% endblock %}
+{% block nav_about %}active{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="container">
+    <div class="badge-year fade-up">Est. 2020 · Alephata</div>
+    <h1 class="fade-up delay-1">Our Story, Our Heart,<br>Our Food 🍕</h1>
+    <p class="lead mt-3 fade-up delay-2">From a small family dream to Alephata's favourite food destination — here's how it all began.</p>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="story-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 story-text fade-up">
+        <span class="section-title">Our Story</span>
+        <p class="mt-4">Prathamesh Food-court was born from a simple love — the love of good food shared with good people.</p>
+        <p>In 2020, that dream became reality. Starting with just three items on the menu — a loaded cheese pizza, a crispy veg burger, and a classic sandwich — the little stall near the HP Petrol Pump quickly became the talk of the town.</p>
+        <p>Today, Prathamesh Food-court serves hundreds of happy customers every week. The menu has grown, the space has expanded, but the soul remains the same: <strong>fresh ingredients, honest prices, and food made with love</strong>.</p>
+      </div>
+      <div class="col-lg-6 fade-up delay-2">
+        <div class="story-img">
+          <img src="{% static 'food/images/pizza.jpg' %}" alt="Our famous pizza">
+          <div class="img-caption">📍 Alephata · Near HP Petrol Pump</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="text-center mb-5 fade-up">
+      <span class="section-title">Our Journey</span>
+      <p class="text-muted mt-3">Every great story has milestones. Here are ours.</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="timeline fade-up delay-1">
+          {% for event in timeline %}
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">{{ event.year }}</div>
+            <h5>{{ event.title }}</h5>
+            <p>{{ event.desc }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="container">
+    <div class="text-center mb-5 fade-up">
+      <span class="section-title">A Taste in Photos</span>
+      <p class="text-muted mt-3">Our food, our people, our place — captured in every frame.</p>
+    </div>
+    <div class="gallery-grid fade-up delay-1">
+      <div class="gallery-item featured">
+        <img src="{% static 'food/images/pizza.jpg' %}" alt="Cheese Pizza">
+        <div class="overlay">🍕</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{% static 'food/images/burger.jpg' %}" alt="Veg Burger">
+        <div class="overlay">🍔</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{% static 'food/images/sandwhich.webp' %}" alt="Sandwich">
+        <div class="overlay">🥪</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{% static 'food/images/french.jpg' %}" alt="French Fries">
+        <div class="overlay">🍟</div>
+      </div>
+      <div class="gallery-item">
+        <img src="{% static 'food/images/burger.jpg' %}" alt="Special Burger">
+        <div class="overlay">🍔</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="container">
+    <div class="text-center mb-5 fade-up">
+      <span class="section-title">What We Stand For</span>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 fade-up">
+        <div class="value-card"><div class="value-icon">🌱</div><h5>Fresh Ingredients</h5><p>Every item is prepared fresh daily. We never compromise on quality.</p></div>
+      </div>
+      <div class="col-md-4 fade-up delay-1">
+        <div class="value-card"><div class="value-icon">💰</div><h5>Honest Prices</h5><p>Great food should be for everyone. Our prices are fair, our portions generous — always.</p></div>
+      </div>
+      <div class="col-md-4 fade-up delay-2">
+        <div class="value-card"><div class="value-icon">❤️</div><h5>Made with Love</h5><p>Every recipe carries the warmth of home cooking. We put our heart into each dish.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="container">
+    <div class="text-center mb-5 fade-up">
+      <span class="section-title">Meet the Family</span>
+      <p class="text-muted mt-3">The people behind every delicious bite.</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      {% for member in team %}
+      <div class="col-md-4 col-sm-6 fade-up">
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="{% static member.image %}" alt="{{ member.name }}">
+          </div>
+          <h5>{{ member.name }}</h5>
+          <div class="role">{{ member.role }}</div>
+          <p>{{ member.bio }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section fade-up">
+  <div class="container">
+    <h2>Hungry? Come Visit Us! 🍕</h2>
+    <p>We're open every day near the HP Petrol Pump, Alephata.</p>
+    <a href="{% url 'menu' %}" class="btn btn-danger btn-lg me-3">View Menu</a>
+    <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Contact Us</a>
+  </div>
+</section>
+
+{% endblock %}

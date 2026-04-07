@@ -1,0 +1,32 @@
+{% extends 'food/base.html' %}
+{% block title %}Contact | Prathamesh Food-court{% endblock %}
+{% block nav_contact %}active{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">📬 Contact Us</h2>
+  <div class="col-md-6 mx-auto">
+    <div class="card shadow">
+      <div class="card-body p-4">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label fw-bold">Name</label>
+            {{ form.name }}
+            {% if form.name.errors %}<div class="text-danger small">{{ form.name.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Message</label>
+            {{ form.message }}
+            {% if form.message.errors %}<div class="text-danger small">{{ form.message.errors.0 }}</div>{% endif %}
+          </div>
+          <button type="submit" class="btn btn-danger w-100">Send Message 📨</button>
+        </form>
+      </div>
+    </div>
+    <div class="text-center mt-3">
+      <a href="{% url 'home' %}" class="text-muted">← Back to Home</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
